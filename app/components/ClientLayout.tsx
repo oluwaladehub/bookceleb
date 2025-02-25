@@ -12,7 +12,7 @@ export function ClientLayout({
     <>
       <Header />
       {children}
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
     </>
   );
 }

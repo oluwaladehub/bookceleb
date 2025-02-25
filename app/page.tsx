@@ -173,21 +173,21 @@ export default function Home() {
           ) : fetchError ? (
             <div className="text-center text-red-600 py-8">{fetchError}</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {celebrities.map((celebrity) => (
                 <div key={celebrity.id} className="rounded-lg overflow-hidden shadow-lg bg-white h-full flex flex-col">
-                  <div className="relative h-64">
+                  <div className="relative h-48">
                     <img
                       src={celebrity.image}
                       alt={celebrity.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="font-bold text-xl mb-2">{celebrity.name}</h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{celebrity.description}</p>
+                  <div className="p-4 flex flex-col flex-grow">
+                    <h3 className="font-bold text-lg mb-1">{celebrity.name}</h3>
+                    <p className="text-gray-600 text-sm mb-3 flex-grow line-clamp-2">{celebrity.description}</p>
                     <Link href={`/celebrity/${celebrity.id}`}>
-                      <Button className="w-full bg-[#2F80ED] hover:bg-[#2F80ED]/90">
+                      <Button className="w-full bg-[#2F80ED] hover:bg-[#2F80ED]/90 text-sm py-2">
                         BOOK CELEBRITY
                       </Button>
                     </Link>

@@ -50,7 +50,7 @@ export default function AdminLayout({
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
-                  <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+                  <img src="./logo_white.png" alt="Logo" className="h-8 w-auto bg-black" />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
                   <span className="text-gray-700 font-medium">Welcome {fullName}</span>
