@@ -110,14 +110,14 @@ export default function Home() {
           <p className="text-xl text-white/90 mb-8">
             We connect audiences with innovative minds and powerful messages and entertainment.
           </p>
-          <div className="flex gap-4 justify-center">
-            <Link href="/celebrities">
-              <Button size="lg" className="bg-[#ff5722] hover:bg-[#f4511e]">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto px-4 sm:px-0">
+            <Link href="/celebrities" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full bg-[#ff5722] hover:bg-[#f4511e] text-base sm:text-lg py-3 px-6">
                 Book A Celebrity
               </Button>
             </Link>
-            <Link href="/search">
-              <Button size="lg" variant="outline" className="bg-[#ff5722] border-white hover:bg-white/10">
+            <Link href="/search" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full bg-[#ff5722] border-white hover:bg-white/10 text-base sm:text-lg py-3 px-6">
                 Search Celebrity
               </Button>
             </Link>

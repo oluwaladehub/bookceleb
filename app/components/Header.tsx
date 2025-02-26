@@ -4,21 +4,22 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-function NavLinks() {
+function NavLinks({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
     <>
-      <Link href="/celebrities" className="hover:text-gray-300 transition-colors">
+      <Link href="/celebrities" className="hover:text-gray-300 transition-colors py-2" onClick={onLinkClick}>
         Find Celebrity
       </Link>
-      <Link href="/about" className="hover:text-gray-300 transition-colors">
+      <Link href="/about" className="hover:text-gray-300 transition-colors py-2" onClick={onLinkClick}>
         About
       </Link>
-      <Link href="/contact" className="hover:text-gray-300 transition-colors">
+      <Link href="/contact" className="hover:text-gray-300 transition-colors py-2" onClick={onLinkClick}>
         Contact
       </Link>
       <Link
         href="/celebrities"
         className="bg-[#2f81ed3f] px-6 py-2 rounded-md hover:bg-[#2F80ED]/90 transition-colors"
+        onClick={onLinkClick}
       >
         BOOK NOW
       </Link>
@@ -29,11 +30,13 @@ function NavLinks() {
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <header className="bg-[#05050F] text-white sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold z-10 flex-shrink-0">
+          <Link href="/" className="text-2xl font-bold z-10 flex-shrink-0" onClick={closeMenu}>
             <img src="/logo_white.png" alt="BookCeleb" className="h-12" />
           </Link>
 
@@ -57,8 +60,8 @@ export function Header() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="fixed inset-0 bg-[#05050F] flex flex-col items-center justify-center gap-8 text-lg md:hidden">
-              <NavLinks />
+            <div className="fixed inset-0 bg-[#05050F] flex flex-col items-center justify-center gap-4 text-lg md:hidden">
+              <NavLinks onLinkClick={closeMenu} />
             </div>
           )}
         </div>
