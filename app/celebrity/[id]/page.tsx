@@ -29,6 +29,8 @@ async function getCelebrity(id: string) {
   return data;
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function CelebrityProfile({ params }: { params: { id: string } }) {
   const celebrity = await getCelebrity(params.id);
 

@@ -180,9 +180,18 @@ export default function CelebritiesManagement() {
   };
 
   const handleEdit = (celebrity: Celebrity) => {
-    setFormData(celebrity);
+    setFormData({
+      name: celebrity.name,
+      image: celebrity.image,
+      description: celebrity.description,
+      category: celebrity.category,
+      fee_range: celebrity.fee_range,
+      availability: celebrity.availability,
+      full_description: celebrity.full_description || ''
+    });
     setEditingId(celebrity.id);
     setIsAddingNew(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
