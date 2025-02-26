@@ -18,9 +18,9 @@ export function CelebrityCard({ celebrity }: CelebrityCardProps) {
           />
         </div>
         <div className="p-4">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-col gap-2 mb-2">
             <h3 className="text-lg font-bold text-gray-900">{celebrity.name}</h3>
-            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded w-fit">
               {celebrity.category}
             </span>
           </div>

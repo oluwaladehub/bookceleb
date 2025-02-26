@@ -62,6 +62,7 @@ export default async function CelebrityProfile({ params }: { params: { id: strin
               <p className="text-gray-300 text-lg italic mb-4">
                 {celebrity.full_description || celebrity.description}
               </p>
+              <p className="text-xl mb-2">Category: {celebrity.category}</p>
               <p className="text-xl">Booking Fee: ${celebrity.fee_range}</p>
             </div>
           </div>
