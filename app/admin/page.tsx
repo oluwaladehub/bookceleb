@@ -4,12 +4,29 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Card } from '@/components/ui/card';
 import { Users, Calendar, CalendarDays, DollarSign } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface BookingType {
   id: number;
   event_date: string;
   status: 'pending' | 'confirmed' | 'cancelled';
-  amount: number;
+  budget: string;
+  event_type: string;
+  location: string;
+  message: string;
+  full_name: string;
+  job_title: string;
+  gender: string;
+  phone: string;
+  email: string;
+  address: string;
+  airport: string;
   celebrities?: {
     name: string;
   };
@@ -24,6 +41,7 @@ export default function AdminDashboard() {
   });
 
   const [recentBookings, setRecentBookings] = useState<BookingType[]>([]);
+  const [selectedBooking, setSelectedBooking] = useState<BookingType | null>(null);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -41,7 +59,7 @@ export default function AdminDashboard() {
         (booking) => booking.status === 'pending'
       ).length;
 
-      // Fetch recent bookings
+      // Fetch recent bookings with all details
       const { data: recent } = await supabase
         .from('bookings')
         .select(`
@@ -100,7 +118,7 @@ export default function AdminDashboard() {
           </div>
         </Card>
 
-        <Card className="p-6">
+        {/* <Card className="p-6">
           <div className="flex items-center">
             <DollarSign className="h-8 w-8 text-purple-500" />
             <div className="ml-4">
@@ -110,7 +128,7 @@ export default function AdminDashboard() {
               </p>
             </div>
           </div>
-        </Card>
+        </Card> */}
       </div>
 
       {/* Recent Bookings */}
@@ -132,10 +150,13 @@ export default function AdminDashboard() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Amount
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {recentBookings.map((booking: any) => (
+              {recentBookings.map((booking) => (
                 <tr key={booking.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
@@ -159,7 +180,16 @@ export default function AdminDashboard() {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${booking.amount?.toLocaleString() || 0}
+                    {booking.budget}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSelectedBooking(booking)}
+                    >
+                      View Details
+                    </Button>
                   </td>
                 </tr>
               ))}
@@ -167,6 +197,65 @@ export default function AdminDashboard() {
           </table>
         </div>
       </div>
+
+      <Dialog open={!!selectedBooking} onOpenChange={() => setSelectedBooking(null)}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Booking Details</DialogTitle>
+          </DialogHeader>
+          {selectedBooking && (
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-gray-500">Celebrity</p>
+                <p className="text-sm">{selectedBooking.celebrities?.name}</p>
+
+                <p className="text-sm font-medium text-gray-500">Event Date</p>
+                <p className="text-sm">{new Date(selectedBooking.event_date).toLocaleDateString()}</p>
+
+                <p className="text-sm font-medium text-gray-500">Event Type</p>
+                <p className="text-sm">{selectedBooking.event_type}</p>
+
+                <p className="text-sm font-medium text-gray-500">Location</p>
+                <p className="text-sm">{selectedBooking.location}</p>
+
+                <p className="text-sm font-medium text-gray-500">Budget</p>
+                <p className="text-sm">{selectedBooking.budget}</p>
+
+                <p className="text-sm font-medium text-gray-500">Status</p>
+                <p className="text-sm">{selectedBooking.status}</p>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-gray-500">Customer Name</p>
+                <p className="text-sm">{selectedBooking.full_name}</p>
+
+                <p className="text-sm font-medium text-gray-500">Job Title</p>
+                <p className="text-sm">{selectedBooking.job_title}</p>
+
+                <p className="text-sm font-medium text-gray-500">Gender</p>
+                <p className="text-sm">{selectedBooking.gender}</p>
+
+                <p className="text-sm font-medium text-gray-500">Contact</p>
+                <p className="text-sm">{selectedBooking.phone}</p>
+                <p className="text-sm">{selectedBooking.email}</p>
+
+                <p className="text-sm font-medium text-gray-500">Address</p>
+                <p className="text-sm">{selectedBooking.address}</p>
+
+                <p className="text-sm font-medium text-gray-500">Nearest Airport</p>
+                <p className="text-sm">{selectedBooking.airport}</p>
+              </div>
+
+              {selectedBooking.message && (
+                <div className="col-span-2">
+                  <p className="text-sm font-medium text-gray-500">Additional Message</p>
+                  <p className="text-sm">{selectedBooking.message}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
