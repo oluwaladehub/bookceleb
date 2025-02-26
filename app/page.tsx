@@ -33,7 +33,7 @@ export default function Home() {
         const { data, error } = await supabase
           .from('celebrities')
           .select('id, name, image, description')
-          .limit(9);
+          .limit(8);
 
         if (error) throw error;
         setCelebrities(data || []);
@@ -73,6 +73,20 @@ export default function Home() {
         ]);
 
       if (error) throw error;
+
+      // Send email notification
+      const emailResponse = await fetch('/api/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ formData }),
+      });
+
+      if (!emailResponse.ok) {
+        const responseData = await emailResponse.json();
+        throw new Error(responseData.error || 'Failed to send email notification');
+      }
 
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
@@ -196,6 +210,17 @@ export default function Home() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Back to Top Button */}
+      <section className="py-8 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <Link href="/celebrities">
+            <Button size="lg" className="bg-[#2F80ED] hover:bg-[#2F80ED]/90">
+              View All Celebrities
+            </Button>
+          </Link>
         </div>
       </section>
 

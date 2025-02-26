@@ -103,8 +103,8 @@ export default function AdminSignup() {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl">
         <div>
           <img
-            className="mx-auto h-12 w-auto"
-            src="/logo.png"
+            className="mx-auto h-12 w-auto bg-black"
+            src="../logo_white.png"
             alt="Logo"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
