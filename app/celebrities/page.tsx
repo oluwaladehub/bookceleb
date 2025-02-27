@@ -51,39 +51,39 @@ export default function CelebritiesPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto mb-12 text-center">
-          <h1 className="text-4xl font-bold mb-4">All Celebrities</h1>
-          <p className="text-gray-600 mb-8">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="max-w-2xl mx-auto mb-8 sm:mb-12 text-center px-4">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">All Celebrities</h1>
+          <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base">
             Browse through our extensive list of celebrities available for booking
           </p>
           <Input
             type="search"
-            placeholder="Search celebrities by name, category, or description..."
+            placeholder="Search celebrities..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-xl mx-auto"
+            className="max-w-xl mx-auto w-full"
           />
         </div>
 
         {error && (
-          <div className="text-center py-6 mb-8">
+          <div className="text-center py-4 sm:py-6 mb-6 sm:mb-8 px-4">
             <p className="text-red-600">{error}</p>
           </div>
         )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-4">
           {filteredCelebrities.map((celebrity) => (
             <CelebrityCard key={celebrity.id} celebrity={celebrity} />
           ))}
         </div>
 
         {filteredCelebrities.length === 0 && (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-semibold text-gray-600">
+          <div className="text-center py-8 sm:py-12 px-4">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-600">
               No celebrities found matching your search.
             </h2>
-            <p className="text-gray-500 mt-2">
+            <p className="text-gray-500 mt-2 text-sm sm:text-base">
               Try adjusting your search terms or browse our complete list.
             </p>
           </div>
