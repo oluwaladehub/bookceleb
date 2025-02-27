@@ -8,7 +8,7 @@ interface CelebrityCardProps {
 
 export function CelebrityCard({ celebrity }: CelebrityCardProps) {
   return (
-    <div className="rounded-lg overflow-hidden shadow-lg bg-white h-full flex flex-col">
+    <div className="rounded-lg overflow-hidden shadow-lg bg-white h-full flex flex-col transition-transform duration-300 hover:scale-105">
       <div className="relative h-32">
         <img
           src={celebrity.image}
