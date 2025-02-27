@@ -50,3 +50,27 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   message TEXT NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Enable Row Level Security
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
+
+-- Policy for inserting messages (anyone can insert)
+CREATE POLICY "Allow public to submit contact messages"
+  ON contact_messages
+  FOR INSERT
+  TO public
+  WITH CHECK (true);
+
+-- Policy for viewing messages (only authenticated admin users can view)
+CREATE POLICY "Allow admins to view contact messages"
+  ON contact_messages
+  FOR SELECT
+  TO authenticated
+  USING (auth.role() = 'admin');
+
+-- Policy for deleting messages (only authenticated admin users can delete)
+CREATE POLICY "Allow admins to delete contact messages"
+  ON contact_messages
+  FOR DELETE
+  TO authenticated
+  USING (auth.role() = 'admin');

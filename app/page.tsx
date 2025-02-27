@@ -63,14 +63,13 @@ export default function Home() {
     try {
       const { error } = await supabase
         .from('contact_messages')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            message: formData.message,
-            created_at: new Date().toISOString(),
-          },
-        ]);
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          created_at: new Date().toISOString(),
+        },
+        );
 
       if (error) throw error;
 
