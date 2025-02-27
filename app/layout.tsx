@@ -6,8 +6,13 @@ import { ClientLayout } from "./components/ClientLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'BookCeleb',
-  description: 'Book your favorite celebrities for events',
+  title: 'BookCeleb Agency',
+  description: 'Book your favorite celebrities for events and engagements',
+  icons: {
+    icon: '/logo_white.png',
+    shortcut: '/logo_white.png',
+    apple: '/logo_white.png',
+  },
 };
 
 export default function RootLayout({
