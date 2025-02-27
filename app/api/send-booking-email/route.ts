@@ -32,7 +32,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'Bookceleb <booking@bookceleb.com>',
-      to: ['oluwaladen@gmail.com'],
+      to: ['Diceybrown1@gmail.com'],
       cc: [bookingData.email],
       subject: `New Booking Request from ${bookingData.full_name}`,
       html: `
