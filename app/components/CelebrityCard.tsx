@@ -16,9 +16,14 @@ export function CelebrityCard({ celebrity }: CelebrityCardProps) {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="p-2 flex flex-col flex-grow">
-        <h3 className="font-bold text-base mb-1">{celebrity.name}</h3>
-        <p className="text-gray-600 text-xs mb-2 flex-grow line-clamp-2">{celebrity.description}</p>
+      <div className="p-4 flex flex-col flex-grow space-y-2">
+        <h3 className="font-bold text-base">{celebrity.name}</h3>
+        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full w-fit">
+          {celebrity.category}
+        </span>
+        <p className="text-gray-600 text-xs flex-grow line-clamp-2 after:content-['...']">
+          {celebrity.description}
+        </p>
         <Link href={`/celebrity/${celebrity.id}`}>
           <Button className="w-full bg-[#2F80ED] hover:bg-[#2F80ED]/90 text-xs py-1">
             BOOK CELEBRITY
