@@ -48,6 +48,20 @@ export default function Home() {
     fetchCelebrities();
   }, []);
 
+  useEffect(() => {
+    var Tawk_API: any = Tawk_API || {};
+    var Tawk_LoadStart = new Date();
+    (function(){
+      var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/678fd46b825083258e089d21/1ii4tbh0p';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode?.insertBefore(s1,s0);
+    })();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
